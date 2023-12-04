@@ -9,7 +9,7 @@ for (int i = 0; i < input.Length; i++)
     int firstPos = 0;
     int lastPos = 0;
     string number = string.Empty;
-    for (int j = 0; j < input[i].Length - 1; j++)
+    for (int j = 0; j <= input[i].Length - 1; j++)
     {
         if (char.IsNumber(input[i][j]))
         {
@@ -21,19 +21,18 @@ for (int i = 0; i < input.Length; i++)
                 firstDigit = false;
             }
         }
-        if (!char.IsNumber(input[i][j]) && isNumber)
+        if (char.IsNumber(input[i][j]) && j == input[i].Length - 1 && isNumber)
         {
-            Console.WriteLine(number);
-            lastPos = j - 1;
+            lastPos = j;
             isNumber = false;
             firstDigit = true;
             if (i == 0)
             {
-                for (int k = i; k < i + 1; k++)
+                for (int k = i; k <= i + 1; k++)
                 {
                     if (firstPos > 0 && lastPos < input[i].Length - 1)
                     {
-                        for (int l = firstPos - 1; l < lastPos + 1; l++)
+                        for (int l = firstPos - 1; l <= lastPos + 1; l++)
                         {
                             if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
                             {
@@ -65,9 +64,9 @@ for (int i = 0; i < input.Length; i++)
 
                 }
             }
-            else if (i < input.Length - 1)
+            else if (i == input.Length - 1)
             {
-                for (int k = i - 1; k < i; k++)
+                for (int k = i - 1; k <= i; k++)
                 {
                     if (firstPos > 0 && lastPos < input[i].Length - 1)
                     {
@@ -104,7 +103,7 @@ for (int i = 0; i < input.Length; i++)
             }
             else
             {
-                for (int k = i - 1; k < i + 1; k++)
+                for (int k = i - 1; k <= i + 1; k++)
                 {
                     if (firstPos > 0 && lastPos < input[i].Length - 1)
                     {
@@ -136,13 +135,145 @@ for (int i = 0; i < input.Length; i++)
                             }
                         }
                     }
-                    
+
                 }
             }
-            if (!isAdjacent)
+            if (isAdjacent)
             {
-                Console.WriteLine($"i:{i} number: {number}");
                 sum += int.Parse(number);
+            }
+            else
+            {
+                Console.WriteLine($"i: {i} number: {number}");
+            }
+            isAdjacent = false;
+            number = string.Empty;
+
+        }
+        else if (!char.IsNumber(input[i][j]) && isNumber)
+        {
+            lastPos = j - 1;
+            isNumber = false;
+            firstDigit = true;
+            if (i == 0)
+            {
+                for (int k = i; k <= i + 1; k++)
+                {
+                    if (firstPos > 0 && lastPos <= input[i].Length - 1)
+                    {
+                        for (int l = firstPos - 1; l <= lastPos + 1; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+                    }
+                    else if (firstPos == 0)
+                    {
+                        for (int l = firstPos; l <= lastPos + 1; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+                    }
+                    else if (lastPos == input[i].Length - 1)
+                    {
+                        for (int l = firstPos - 1; l <= lastPos; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+
+                    }
+
+                }
+            }
+            else if (i == input.Length - 1)
+            {
+                for (int k = i - 1; k <= i; k++)
+                {
+                    if (firstPos > 0 && lastPos < input[i].Length - 1)
+                    {
+                        for (int l = firstPos - 1; l <= lastPos + 1; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+                    }
+                    else if (firstPos == 0)
+                    {
+                        for (int l = firstPos; l <= lastPos + 1; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+                    }
+                    else if (lastPos == input[i].Length - 1)
+                    {
+                        for (int l = firstPos - 1; l <= lastPos; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                for (int k = i - 1; k <= i + 1; k++)
+                {
+                    if (firstPos > 0 && lastPos < input[i].Length - 1)
+                    {
+                        for (int l = firstPos - 1; l <= lastPos + 1; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+                    }
+                    else if (firstPos == 0)
+                    {
+                        for (int l = firstPos; l <= lastPos + 1; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+                    }
+                    else if (lastPos == input[i].Length - 1)
+                    {
+                        for (int l = firstPos - 1; l <= lastPos; l++)
+                        {
+                            if (!char.IsNumber(input[k][l]) && !input[k][l].Equals('.'))
+                            {
+                                isAdjacent = true;
+                            }
+                        }
+                    }
+
+                }
+            }
+            if (isAdjacent)
+            {
+                sum += int.Parse(number);
+            }
+            else
+            {
+                Console.WriteLine($"i: {i} number: {number}");
             }
             isAdjacent = false;
             number = string.Empty;
@@ -150,3 +281,4 @@ for (int i = 0; i < input.Length; i++)
 
     }
 }
+Console.WriteLine(sum);
